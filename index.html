@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESENCIA Y SISTEMAS - Tiendas Virtuales con IA</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; color: #1e293b; line-height: 1.6; }
+        header { background: linear-gradient(135deg, #0f2b3d, #1a4a6f); color: white; padding: 2rem; text-align: center; }
+        .container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .servicios { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+        .card { background: white; border-radius: 20px; padding: 1.5rem; flex: 1; min-width: 260px; max-width: 320px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 4px solid #25d366; text-align: center; }
+        .precio { font-size: 2rem; color: #1a4a6f; font-weight: bold; margin: 1rem 0; }
+        .btn { display: inline-block; background: #25d366; color: white; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; margin-top: 1rem; width: 100%; }
+        footer { background: #0f2b3d; color: #cbd5e1; text-align: center; padding: 2rem; margin-top: 2rem; }
+        @media (max-width: 768px) { .servicios { flex-direction: column; align-items: center; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌿 ESENCIA Y SISTEMAS</h1>
+        <p>Creamos tu tienda virtual en 7 días · Con IA integrada</p>
+    </header>
+    <div class="container">
+        <h2>📦 Nuestros Servicios</h2>
+        <div class="servicios">
+            <div class="card">
+                <h3>Paquete Básico</h3>
+                <div class="precio">$8,000 MXN</div>
+                <ul style="text-align: left;">
+                    <li>📄 Tienda con plantilla</li>
+                    <li>📦 Hasta 30 productos</li>
+                    <li>💳 Pagos configurados</li>
+                    <li>⏱️ Entrega 7 días</li>
+                </ul>
+                <a href="https://wa.me/527779107055?text=Me%20interesa%20el%20Paquete%20Básico" class="btn">📲 Contratar</a>
+            </div>
+            <div class="card">
+                <h3>Paquete Profesional</h3>
+                <div class="precio">$25,000 MXN</div>
+                <ul style="text-align: left;">
+                    <li>🎨 Diseño personalizado</li>
+                    <li>📦 Hasta 100 productos</li>
+                    <li>🔍 SEO básico</li>
+                    <li>⏱️ Entrega 14 días</li>
+                    <li>🛡️ 30 días soporte</li>
+                </ul>
+                <a href="https://wa.me/527779107055?text=Me%20interesa%20el%20Paquete%20Profesional" class="btn">📲 Contratar</a>
+            </div>
+            <div class="card">
+                <h3>Paquete Premium</h3>
+                <div class="precio">$50,000 MXN</div>
+                <ul style="text-align: left;">
+                    <li>🏆 Diseño exclusivo</li>
+                    <li>🚀 Tienda ilimitada</li>
+                    <li>🤖 Chatbot con IA</li>
+                    <li>⚙️ Automatizaciones</li>
+                    <li>🏆 SEO avanzado</li>
+                    <li>⏱️ Entrega 30 días</li>
+                    <li>🛡️ 3 meses soporte</li>
+                </ul>
+                <a href="https://wa.me/527779107055?text=Me%20interesa%20el%20Paquete%20Premium" class="btn">📲 Contratar</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>📧 contacto@esenciaysistemas.com | 📞 52 777 910 7055</p>
+        <p>© 2026 ESENCIA Y SISTEMAS</p>
+    </footer>
+
+    <!-- Chat flotante IA -->
+    <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+        <div id="chat-toggle" style="background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); font-size: 12px; text-align: center; flex-direction: column;">💬<br>Chat</div>
+        <div id="chat-window" style="display: none; position: absolute; bottom: 75px; right: 0; width: 280px; background: white; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); overflow: hidden;">
+            <div style="background: #0f2b3d; color: white; padding: 10px; text-align: center; font-weight: bold;">🤖 Asistente ESENCIA</div>
+            <div id="chat-messages" style="height: 300px; overflow-y: auto; padding: 10px; background: #f9f9f9; font-size: 13px; color: black;"></div>
+            <div style="padding: 10px; display: flex; gap: 5px; background: white;">
+                <input type="text" id="chat-input" placeholder="Ej: ¿Qué incluye el Premium?" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 20px;">
+                <button id="chat-send" style="background: #25d366; color: white; border: none; padding: 6px 12px; border-radius: 20px;">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const toggle = document.getElementById('chat-toggle');
+        const windowChat = document.getElementById('chat-window');
+        const input = document.getElementById('chat-input');
+        const send = document.getElementById('chat-send');
+        const messages = document.getElementById('chat-messages');
+        toggle.onclick = () => windowChat.style.display = windowChat.style.display === 'none' ? 'block' : 'none';
+        async function sendMessage() {
+            const msg = input.value.trim();
+            if (!msg) return;
+            messages.innerHTML += `<div style="margin-bottom:6px;padding:5px;background:#e9ecef;border-radius:10px;">👤 Tú: ${msg}</div>`;
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+            messages.innerHTML += `<div id="thinking" style="margin-bottom:6px;padding:5px;background:#d1e7dd;border-radius:10px;">🤖 Asistente: ...</div>`;
+            try {
+                const res = await fetch('http://127.0.0.1:11434/api/generate', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: "qwen2.5-coder:1.5b", prompt: `Eres vendedor ESENCIA Y SISTEMAS. Paquetes: Básico $8k, Profesional $25k, Premium $50k (con IA). Pregunta: ${msg}`, stream: false })
+                });
+                const data = await res.json();
+                document.getElementById('thinking')?.remove();
+                messages.innerHTML += `<div style="margin-bottom:6px;padding:5px;background:#d1e7dd;border-radius:10px;">🤖 Asistente: ${data.response}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            } catch(e) {
+                document.getElementById('thinking')?.remove();
+                messages.innerHTML += `<div style="margin-bottom:6px;padding:5px;background:#ffe6e6;color:red;border-radius:10px;">🤖 Asistente: Escríbenos a WhatsApp 52 777 910 7055</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+        send.onclick = sendMessage;
+        input.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+    </script>
+</body>
+</html>
