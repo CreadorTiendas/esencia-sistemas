@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Esencia y Sistemas - Creación de Tiendas Online con IA</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a2a; color: #ffffff; line-height: 1.6; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; text-align: center; border-bottom: 4px solid #f093fb; }
+        .container { max-width: 1200px; margin: auto; padding: 2rem; }
+        .estadisticas { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+        .tarjeta-estadistica { background: rgba(255,255,255,0.1); border-radius: 20px; padding: 1rem; flex: 1; min-width: 120px; text-align: center; backdrop-filter: blur(10px);}
+        .numero { font-size: 2rem; font-weight: bold; color: #f093fb; }
+        .servicios, .paquetes { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
+        .card { background: rgba(255,255,255,0.1); border-radius: 20px; padding: 1.5rem; flex: 1; min-width: 280px; max-width: 320px; backdrop-filter: blur(10px); border-top: 4px solid #f093fb; text-align: center; }
+        .precio { font-size: 2rem; color: #f093fb; font-weight: bold; margin: 1rem 0; background: rgba(0,0,0,0.3); display: inline-block; padding: 0.3rem 1rem; border-radius: 40px; }
+        .btn { display: inline-block; background: #f093fb; color: #0a0a2a; padding: 0.8rem 1rem; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 1rem; width: 100%; text-align: center; cursor: pointer; border: none; }
+        footer { background: #050515; color: #aaa; text-align: center; padding: 2rem; margin-top: 2rem; }
+        @media (max-width: 768px) { .servicios, .paquetes { flex-direction: column; align-items: center; } }
+        h2 { text-align: center; margin-bottom: 2rem; color: #f093fb; }
+
+        /* Chat flotante */
+        .chat-btn { position: fixed; bottom: 20px; right: 20px; background: #f093fb; color: #0a0a2a; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-size: 24px; border: none; }
+        .chat-window { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background: white; border-radius: 16px; box-shadow: 0 5px 25px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 1001; overflow: hidden; font-family: sans-serif; }
+        .chat-header { background: #1a1a3a; color: white; padding: 12px; font-weight: bold; text-align: center; }
+        .chat-messages { flex-grow: 1; padding: 10px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 8px; }
+        .message { display: flex; margin-bottom: 10px; }
+        .user-message { justify-content: flex-end; }
+        .bot-message { justify-content: flex-start; }
+        .message-bubble { max-width: 80%; padding: 8px 12px; border-radius: 18px; font-size: 14px; line-height: 1.4; }
+        .user-message .message-bubble { background: #007bff; color: white; border-bottom-right-radius: 4px; }
+        .bot-message .message-bubble { background: #e9ecef; color: #333; border-bottom-left-radius: 4px; }
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #eee; background: white; }
+        .chat-input { flex-grow: 1; padding: 8px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+        .send-btn { background: #f093fb; color: #0a0a2a; border: none; border-radius: 50%; width: 36px; height: 36px; margin-left: 8px; cursor: pointer; font-size: 18px; }
+        .send-btn:disabled { opacity: 0.5; }
+        .typing { color: #666; font-size: 12px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ESENCIA Y SISTEMAS</h1>
+        <p>Creación de tiendas online con inteligencia artificial</p>
+    </header>
+    <div class="container">
+        <div class="estadisticas">
+            <div class="tarjeta-estadistica"><h3>Visitas</h3><div class="numero" id="visitas">0</div></div>
+            <div class="tarjeta-estadistica"><h3>Consultas</h3><div class="numero" id="consultas">0</div></div>
+            <div class="tarjeta-estadistica"><h3>Cotizaciones</h3><div class="numero" id="cotizaciones">0</div></div>
+        </div>
+        
+        <h2>Nuestros Servicios</h2>
+        <div class="servicios">
+            <div class="card"><h3>Tienda Básica</h3><div class="precio">$8,000 MXN</div><ul><li>Tienda con plantilla</li><li>Hasta 30 productos</li><li>Pagos configurados</li><li>Entrega 7 días</li></ul><button class="btn" onclick="registrarCotizacion('Tienda Básica')">Contratar</button></div>
+            <div class="card"><h3>Tienda Profesional</h3><div class="precio">$25,000 MXN</div><ul><li>Diseño personalizado</li><li>Hasta 100 productos</li><li>Chat con IA</li><li>Panel administrativo</li></ul><button class="btn" onclick="registrarCotizacion('Tienda Profesional')">Contratar</button></div>
+            <div class="card"><h3>Tienda Premium</h3><div class="precio">$50,000 MXN</div><ul><li>Productos ilimitados</li><li>IA avanzada</li><li>Pasarela de pagos</li><li>Entrega 14 días</li></ul><button class="btn" onclick="registrarCotizacion('Tienda Premium')">Contratar</button></div>
+        </div>
+
+        <h2>Paquetes Especiales</h2>
+        <div class="paquetes">
+            <div class="card"><h3>Emprendedor Digital</h3><div class="precio">$30,000 MXN</div><ul><li>Tienda Profesional</li><li>Hosting 1 año</li><li>Dominio .com</li><li>Soporte 30 días</li></ul><button class="btn" onclick="registrarCotizacion('Emprendedor Digital')">Contratar</button></div>
+            <div class="card"><h3>Agencia IA</h3><div class="precio">$60,000 MXN</div><ul><li>Tienda Premium</li><li>Chatbot IA personalizado</li><li>SEO básico</li><li>Capacitación incluida</li></ul><button class="btn" onclick="registrarCotizacion('Agencia IA')">Contratar</button></div>
+            <div class="card"><h3>Mantenimiento Mensual</h3><div class="precio">$990 MXN</div><ul><li>Actualizaciones</li><li>Respaldo semanal</li><li>Soporte 24/7</li></ul><button class="btn" onclick="registrarCotizacion('Mantenimiento')">Contratar</button></div>
+        </div>
+    </div>
+    <footer>
+        <p>📍 Camino Antiguo a Chamilpa #50, Colonia Tlatepexco, Cuernavaca, Morelos, CP 62233</p>
+        <p>📧 contacto@esencia-sistemas.com | 📞 52 777 910 7055</p>
+        <p>© 2026 Esencia y Sistemas - Creación de tiendas con IA</p>
+    </footer>
+
+    <!-- Chat IA Integrado -->
+    <button class="chat-btn" id="chatBtn">💬</button>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">Asistente IA - Esencia y Sistemas</div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message"><div class="message-bubble">¡Hola! Pregúntame por precios de tiendas básica, profesional o premium. 🚀</div></div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ej: ¿Cuánto cuesta la tienda profesional?" />
+            <button class="send-btn" id="sendBtn">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const GEMINI_API_KEY = "AIzaSyDyUqc_TMlHXdZcn3iwPVWye10B1J9kwHY";
+        
+        let visitas = localStorage.getItem('visitas_esencia') ? parseInt(localStorage.getItem('visitas_esencia')) : 0;
+        let consultas = localStorage.getItem('consultas_esencia') ? parseInt(localStorage.getItem('consultas_esencia')) : 0;
+        let cotizaciones = localStorage.getItem('cotizaciones_esencia') ? parseInt(localStorage.getItem('cotizaciones_esencia')) : 0;
+        visitas++; localStorage.setItem('visitas_esencia', visitas);
+        document.getElementById('visitas').innerText = visitas;
+        document.getElementById('consultas').innerText = consultas;
+        document.getElementById('cotizaciones').innerText = cotizaciones;
+        
+        window.registrarCotizacion = function(pack) { 
+            cotizaciones++; 
+            localStorage.setItem('cotizaciones_esencia', cotizaciones); 
+            document.getElementById('cotizaciones').innerText = cotizaciones; 
+            window.open('https://wa.me/527779107055?text=Me%20interesa%20el%20paquete%20de%20' + pack, '_blank'); 
+        };
+
+        // Chat
+        const chatBtn = document.getElementById('chatBtn');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        let waiting = false;
+
+        chatBtn.onclick = () => chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+
+        function addMsg(text, isUser) {
+            const div = document.createElement('div');
+            div.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            div.innerHTML = `<div class="message-bubble">${text}</div>`;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMsg() {
+            const q = chatInput.value.trim();
+            if (!q || waiting) return;
+            consultas++;
+            localStorage.setItem('consultas_esencia', consultas);
+            document.getElementById('consultas').innerText = consultas;
+            addMsg(q, true);
+            chatInput.value = '';
+            waiting = true;
+            sendBtn.disabled = true;
+            addMsg('✍️ Escribiendo...', false);
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Eres el asistente de "Esencia y Sistemas", una empresa que crea tiendas online. Responde SOLO preguntas sobre los paquetes: Básico $8,000, Profesional $25,000, Premium $50,000, Emprendedor Digital $30,000, Agencia IA $60,000, Mantenimiento $990. Ubicación: Camino Antiguo a Chamilpa #50, Cuernavaca. WhatsApp: 52 777 910 7055. NO respondas sobre moxibustión, acupuntura, etc. Pregunta: ${q}` }] }]
+                    })
+                });
+                const data = await res.json();
+                const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Lo siento, no entendí. ¿Preguntas por precios de nuestras tiendas?";
+                chatMessages.removeChild(chatMessages.lastChild);
+                addMsg(reply, false);
+            } catch(e) {
+                chatMessages.removeChild(chatMessages.lastChild);
+                addMsg("Error. Escríbenos por WhatsApp.", false);
+            }
+            waiting = false;
+            sendBtn.disabled = false;
+        }
+        sendBtn.onclick = sendMsg;
+        chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMsg(); };
+    </script>
+</body>
+</html>
