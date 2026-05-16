@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Esencia y Sistemas - Tiendas online con IA</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fdfaf6;
+            color: #2c1810;
+            line-height: 1.6;
+        }
+        .hero-esencia {
+            background: linear-gradient(135deg, #0a1929 0%, #1a2f3f 100%);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            color: white;
+            border-bottom: 4px solid #d4a017;
+        }
+        .hero-esencia h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        .tagline {
+            font-size: 1.1rem;
+            color: #d4a017;
+            margin-bottom: 1rem;
+        }
+        .frase {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        .botones-hero {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primario, .btn-secundario {
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primario {
+            background: #d4a017;
+            color: #0a1929;
+        }
+        .btn-primario:hover {
+            background: #e6b422;
+            transform: scale(1.02);
+        }
+        .btn-secundario {
+            border: 2px solid #d4a017;
+            color: white;
+        }
+        .btn-secundario:hover {
+            background: rgba(212, 160, 23, 0.2);
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+        .estadisticas {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .tarjeta-stat {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            min-width: 100px;
+        }
+        .numero {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d4a017;
+        }
+        .servicios, .paquetes {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            width: 280px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid #d4a017;
+            text-align: center;
+        }
+        .precio {
+            font-size: 1.8rem;
+            color: #4a2c2c;
+            font-weight: bold;
+            background: #fef3e0;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin: 1rem 0;
+        }
+        .btn-card {
+            background: #d4a017;
+            color: #2c1810;
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        .cta {
+            background: #4a2c2c;
+            color: #e6c8a0;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            border-radius: 20px;
+            max-width: 800px;
+            text-align: center;
+        }
+        .boton-copiar {
+            background: #d4a017;
+            color: #2c1810;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+        .footer {
+            background: #2a2a2a;
+            color: #e6c8a0;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: #d4a017;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .servicios, .paquetes {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-esencia h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-esencia">
+        <div class="hero-contenido">
+            <h1>Esencia y Sistemas</h1>
+            <p class="tagline">Creación de tiendas online con inteligencia artificial</p>
+            <p class="frase">🚀 Tu negocio en Internet en menos de 24 horas</p>
+            <div class="botones-hero">
+                <a href="#paquetes" class="btn-primario">Ver paquetes</a>
+                <a href="https://wa.me/527779107055?text=Hola,%20quiero%20cotizar%20mi%20tienda%20online" class="btn-secundario">Cotizar ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="estadisticas">
+            <div class="tarjeta-stat"><h3>Visitas</h3><div class="numero" id="visitas">0</div></div>
+            <div class="tarjeta-stat"><h3>Consultas</h3><div class="numero" id="consultas">0</div></div>
+            <div class="tarjeta-stat"><h3>Cotizaciones</h3><div class="numero" id="cotizaciones">0</div></div>
+        </div>
+
+        <h2 style="text-align:center;">🌟 Nuestros Servicios</h2>
+        <div class="servicios">
+            <div class="card"><h3>Tienda Básica</h3><div class="precio">$8,000 MXN</div><ul><li>Tienda con plantilla</li><li>Hasta 30 productos</li><li>Pagos configurados</li><li>Entrega 7 días</li></ul><a href="https://wa.me/527779107055?text=Me%20interesa%20Tienda%20Básica" class="btn-card">📲 Contratar</a></div>
+            <div class="card"><h3>Tienda Profesional</h3><div class="precio">$25,000 MXN</div><ul><li>Diseño personalizado</li><li>Hasta 100 productos</li><li>Chat con IA</li><li>Panel administrativo</li></ul><a href="https://wa.me/527779107055?text=Me%20interesa%20Tienda%20Profesional" class="btn-card">📲 Contratar</a></div>
+            <div class="card"><h3>Tienda Premium</h3><div class="precio">$50,000 MXN</div><ul><li>Productos ilimitados</li><li>IA avanzada</li><li>Pasarela de pagos</li><li>Entrega 14 días</li></ul><a href="https://wa.me/527779107055?text=Me%20interesa%20Tienda%20Premium" class="btn-card">📲 Contratar</a></div>
+        </div>
+
+        <h2 id="paquetes" style="text-align:center;">🎁 Paquetes Especiales</h2>
+        <div class="paquetes">
+            <div class="card"><h3>Emprendedor Digital</h3><div class="precio">$30,000 MXN</div><ul><li>Tienda Profesional</li><li>Hosting 1 año</li><li>Dominio .com</li><li>Soporte 30 días</li></ul><a href="https://wa.me/527779107055?text=Me%20interesa%20Emprendedor%20Digital" class="btn-card">📲 Contratar</a></div>
+            <div class="card"><h3>Agencia IA</h3><div class="precio">$60,000 MXN</div><ul><li>Tienda Premium</li><li>Chatbot IA personalizado</li><li>SEO básico</li><li>Capacitación incluida</li></ul><a href="https://wa.me/527779107055?text=Me%20interesa%20Agencia%20IA" class="btn-card">📲 Contratar</a></div>
+            <div class="card"><h3>Mantenimiento Mensual</h3><div class="precio">$990 MXN</div><ul><li>Actualizaciones</li><li>Respaldo semanal</li><li>Soporte 24/7</li></ul><a href="https://wa.me/527779107055?text=Me%20interesa%20Mantenimiento%20Mensual" class="btn-card">📲 Contratar</a></div>
+        </div>
+    </div>
+
+    <!-- PAGO SEGURO POR TRANSFERENCIA (CLABE) -->
+    <div class="cta">
+        <h3>🔒 Pago seguro por transferencia</h3>
+        <p>Para apartar tu cita, realiza una transferencia a esta CLABE (solo sirve para depositar):</p>
+        <p><strong>CLABE: 1275 4002 1038 8372</strong></p>
+        <button class="boton-copiar" onclick="copiarCLABE()">📋 Copiar CLABE</button>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">✅ Una vez transferido, envíanos tu comprobante por WhatsApp.<br>🔐 Tus datos están seguros. Nunca te pediremos tu número de tarjeta.</p>
+    </div>
+
+    <div class="footer">
+        <p>📍 Camino Antiguo a Chamilpa #50, Col. Tlatepexco, Cuernavaca, Morelos. CP 62233</p>
+        <p>📧 contacto@esenciasistemas.com | 📞 WhatsApp: 52 777 910 7055</p>
+        <p>🕘 Horarios: Lun-Sáb 10am-7pm | Dom con cita previa</p>
+        <p>© 2026 Esencia y Sistemas — Creando negocios digitales</p>
+        <p><a href="https://CreadorTiendas.github.io/espiritu-dragon">Espíritu del Dragón</a> — Sanación ancestral</p>
+    </div>
+
+    <script src="//code.tidio.co/turocovxhshqbvu6tzomxcxuaoiejo4m.js" async></script>
+
+    <script>
+        let visitas = localStorage.getItem('visitas_esencia') ? parseInt(localStorage.getItem('visitas_esencia')) : 0;
+        visitas++;
+        localStorage.setItem('visitas_esencia', visitas);
+        document.getElementById('visitas').innerText = visitas;
+
+        let consultas = localStorage.getItem('consultas_esencia') ? parseInt(localStorage.getItem('consultas_esencia')) : 0;
+        document.getElementById('consultas').innerText = consultas;
+
+        let cotizaciones = localStorage.getItem('cotizaciones_esencia') ? parseInt(localStorage.getItem('cotizaciones_esencia')) : 0;
+        document.getElementById('cotizaciones').innerText = cotizaciones;
+
+        function copiarCLABE() {
+            const clabe = "1275 4002 1038 8372";
+            navigator.clipboard.writeText(clabe).then(() => {
+                alert("✅ CLABE " + clabe + " copiada. Realiza tu transferencia y envíanos el comprobante por WhatsApp.");
+            }).catch(() => {
+                alert("❌ No se pudo copiar. Copia manualmente: " + clabe);
+            });
+        }
+    </script>
+</body>
+</html>
